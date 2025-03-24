@@ -6,8 +6,12 @@ const authRouter = require('./routes/auth.route');
 const cookieParser = require('cookie-parser'); 
 const listingRouter= require('./routes/listing.route');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 dotenv.config();
 app.use(cookieParser());
