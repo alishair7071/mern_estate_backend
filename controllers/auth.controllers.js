@@ -50,7 +50,12 @@ const signIn = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
     res
-      .cookie("access_token", token)
+      .cookie("access_token", token, {
+        httpOnly: true,      // Prevents client-side access (optional but recommended)
+        secure: true,        // ✅ Required for HTTPS (Netlify)
+        sameSite: "None",    // ✅ Required for cross-origin requests
+        path: "/",  
+      })
       .status(200)
       .json(rest);
   } catch (e) {

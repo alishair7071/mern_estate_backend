@@ -9,9 +9,10 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-
-app.use(cors());
-
+app.use(cors({
+  origin: ['https://mern-estate-frontend.netlify.app', 'http://localhost:5173'], // Allow multiple origins
+  credentials: true
+}));
 app.use(express.json());
 dotenv.config();
 app.use(cookieParser());
